@@ -30,6 +30,7 @@ app.get("/scrape", function (req, res) {
         var $ = cheerio.load(response.data);
         var teamResults = [];
         var oddsResults = [];
+        var teamandodds = [];
 
         $("td.font-bold").each(function (j, element) {
 
@@ -47,12 +48,25 @@ app.get("/scrape", function (req, res) {
         });
 
         for (k = 0; k < 32; k++) {
-            console.log(
-                "The current odds for the " + teamResults[k].team + " to win the superbowl are: " + oddsResults[k].odds + ".")
+            
+       teamandodds.push(teamResults[k].team+
+        ": "+ oddsResults[k].odds)
         }
-
+       console.log(teamandodds);
     });
 
+});
+
+app.get("/odds", function (req, res) {
+
+    db.odds.find({})
+        .then(function (dbodds) {
+            res.json(dbodds);
+
+        })
+        .catch(function(err) {
+            res.json(err);
+        });
 });
 
 app.listen(Port, function () {

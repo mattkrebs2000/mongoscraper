@@ -22,6 +22,6 @@ var oddsSchema = new Schema({
     }
 });
 
-var odds = mongoose.model("Odds", oddsSchema);
+var odds = mongoose.model("odds", oddsSchema);
 
 module.exports = odds; 
