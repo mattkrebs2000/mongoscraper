@@ -19,9 +19,10 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //make a "public" a static folder
+//this is also the HTML route for the file index.html
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/articles", { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/mongoscraperproject", { useUnifiedTopology: true, useNewUrlParser: true });
 
 app.get("/scrape", function (req, res) {
 
@@ -38,6 +39,7 @@ app.get("/scrape", function (req, res) {
             teamResults.push({
                 team: team
             });
+       
         });
 
         $("td.last").each(function (i, elements) {
@@ -45,14 +47,36 @@ app.get("/scrape", function (req, res) {
             oddsResults.push({
                 odds: odds
             });
-        });
 
+            // db.odds.create(oddsResults[i])
+            //     .then(function (dbOdd) {
+            //         console.log(dbOdd);
+            //     })
+            //     .catch(function (err) {
+            //         console.log(err);
+            //     });
+
+        });
+       
+var result ={};
         for (k = 0; k < 32; k++) {
             
        teamandodds.push(teamResults[k].team+
         ": "+ oddsResults[k].odds)
-        }
+        
        console.log(teamandodds);
+
+       result.team = teamResults[k].team;
+       result.odds = oddsResults[k].odds;
+
+       db.odds.create(result)
+       .then(function(dbOdd){
+           console.log(dbOdd);
+       })
+       .catch(function(err){
+           console.log(err);
+       });
+    }
     });
 
 });

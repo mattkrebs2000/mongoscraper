@@ -7,7 +7,8 @@ var oddsSchema = new Schema({
 
     team: {
         type: String,
-        required: true
+        required: true,
+        unique: true
 
     },
 
