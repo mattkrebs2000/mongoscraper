@@ -25,8 +25,6 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-// app.get("../public/css/css.css", function (req, res) { res.send("public/css/css.css"); res.end(); });
-
 mongoose.connect("mongodb://localhost/mongoscraperproject", { useUnifiedTopology: true, useNewUrlParser: true });
 
 var url = "mongodb://localhost/mongoscraperproject";
@@ -104,13 +102,14 @@ app.get("/scrape", function (req, res) {
 
     //shouldnt it say this in the address bar?
 
-    res.sendFile(__dirname + "/public/index.html");
+    res.send("completed");
     
    
 
 });
 
 app.get("/odds", function (req, res) {
+console.log("itis");
 
     db.odds.find({})
         .then(function (dbodds) {
