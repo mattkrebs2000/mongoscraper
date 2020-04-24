@@ -94,7 +94,16 @@ app.get("/scrape", function (req, res) {
         }
     });
    
-    //shouldnt it say this in the address bar? 
+
+// $.getJSON("/odds", function(data) {
+//  for (var i = 0; i< data.length; i ++) {
+//      $(".alert").append("<p data-id='"+ data[i]._id + "'>" +data[i].team + "<br />" + data[i].odds + "</p>"); 
+
+//  }
+// });
+
+    //shouldnt it say this in the address bar?
+
     res.sendFile(__dirname + "/public/index.html");
     
    
@@ -127,7 +136,7 @@ app.get("/odds/:id", function (req, res) {
         })
 });
 
-app.post("/articles/:id", function (req, res) {
+app.post("/odds/:id", function (req, res) {
 
     db.note.create(req.body)
         .then(function (dbnote) {
