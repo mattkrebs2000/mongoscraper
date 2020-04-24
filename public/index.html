@@ -3,25 +3,100 @@
 
 <head>
     <!-- This file has obviously been taken from the assignment website.  -->
+
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <link href="../public/css/css.css" rel="stylesheet" type="text/css"/>
     <title>Mongo Scraper</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/materia/bootstrap.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+   
+   
+<style>
+
+.jumbotron {
+background-color: red;
+
+}
+
+.hidden {
+
+display:none;
+
+}
+
+.caption {
+
+background-color: red;
+
+}
+
+</style>
+
 </head>
 
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav id="nav2" class="navbar-dark navbar-success bg-transparent navbar-expand navigation-bar is-visible"
+    data-nav-status="toggle">
+
+    <button id="navbarButton" class="navbar-toggler mr-auto custom-toggler" style="margin: 20px 0 0 20px;" type="button"
+        data-toggle="collapse" data-target="#nav3">
+
+        <div class="navbar-toggler-icon"></div>
+    </button>
+
+    <div class="navbar-collapse collapse" id="nav3">
+        <ul class="nav navbar-nav.navbar-right ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show"></a>
+            </li>
+
+            <li id="bottomLink" class="nav-item">
+                <a id="bottomLink" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="/scrape">Scrape Current
+                    Odds</a>
+            </li>
+
+            <li class="nav-item">
+                <a id="toplink" class="nav-link" data-toggle="collapse"
+                    data-target=".navbar-collapse.show">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse"
+                    data-target=".navbar-collapse.show">Saved Odds</a>
+            </li>
+            </li>
+<!-- 
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse"
+                    data-target=".navbar-collapse.show">Saved</a>
+            </li> -->
+
+           
+
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+    <!-- <nav class="navbar navbar-expand navigation-bar is-visible navbar-dark bg-primary">
         <a class="navbar-brand" href="/">Mongo Scraper</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
+        <div class="collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Home
                         <span class="sr-only">(current)</span>
                     </a>
@@ -30,14 +105,14 @@
                     <a class="nav-link" href="/saved">Saved Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</a>
+                    <a class="btn btn-danger scrape-new">Update Odds!</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-danger clear">CLEAR ARTICLES!</a>
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
 
     <div class="jumbotron text-center">
         <div class="overlay">
@@ -46,13 +121,13 @@
         </div>
         <div class="caption">
             <h1>Mongo Scraper</h1>
-            <p>New York Times Edition</p>
+            <p>Super Bowl Odds Edition</p>
         </div>
     </div>
     <div class="container-fluid article-container">
 
         <div class='alert alert-warning text-center'>
-            <h4>Uh Oh. Looks like we don't have any new articles.</h4>
+            <h4 class="noarticles"> Uh Oh. Looks like we don't have any odds posted.</h4>
         </div>
         <div class="card">
             <div class="card-header text-center">
@@ -60,10 +135,10 @@
             </div>
             <div class="card-body text-center">
                 <h4>
-                    <a class="scrape-new">Try Scraping New Articles</a>
+                    <a class="scrape-new">Try Updating Odds</a>
                 </h4>
                 <h4>
-                    <a href="/saved">Go to Saved Articles</a>
+                    <a href="/savedd">Go to Saved Comments</a>
                 </h4>
             </div>
         </div>
@@ -71,14 +146,10 @@
 
     <footer class="footer">
         <div class="container">
-            <p>New York Times Mongo Scraper</p>
+            <p>Super Bowl Odds Mongo Scrapers</p>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-    <script src="/assets/javascript/index.js"></script>
 
 </body>
 
