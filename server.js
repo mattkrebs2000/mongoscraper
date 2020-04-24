@@ -1,5 +1,6 @@
 var express = require("express");
 var logger = require("morgan");
+
 var mongoose = require("mongoose");
 
 //scraping tools
@@ -22,7 +23,7 @@ app.use(express.json());
 
 //this is also the HTML route for the file index.html
 app.use(express.static("public"));
-app.use(express.static("css"));
+
 
 // app.get("../public/css/css.css", function (req, res) { res.send("public/css/css.css"); res.end(); });
 
