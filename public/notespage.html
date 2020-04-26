@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="app.js"></script>
     <link href="./css/css.css" rel="stylesheet" type="text/css" />
@@ -36,21 +37,22 @@
         ​
         <div class="navbar-collapse collapse" id="nav3">
             <ul class="nav navbar-nav.navbar-right ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show"></a>
-                </li>
-                ​
-                <li id="bottomLink" class="nav-item">
-                    <button id="bottomLink" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show"
-                        href="">Scrape Current
-                        Odds</button>
-                </li>
+              
                 ​
                 
+                ​
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="/notes">Saved Odds</a>
+
+                    
+                    
+                    <button> <a id="prevent" href="/">Home</a></button>
+                    
+                  
+               
+              
                 </li>
-                </li>
+        
+                
                 <!-- 
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse"
@@ -70,19 +72,47 @@
     ​
     ​
     ​
+    ​
+    ​
+    <!-- <nav class="navbar navbar-expand navigation-bar is-visible navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">Mongo Scraper</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/saved">Saved Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger scrape-new">Update Odds!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger clear">CLEAR ARTICLES!</a>
+                </li>
+            </ul>
+        </div>
+    </nav> -->
+    ​
     <div class="jumbotron text-center">
         <div class="overlay">
         </div>
         <div class="background-image">
         </div>
         <div class="caption">
-            <h1>Mongo Scraper</h1>
+            <h1>Saved Odds</h1>
             <p>Super Bowl Odds Edition</p>
         </div>
     </div>
     <div class="container-fluid article-container">
         ​
-        <div class='alert alert-warning text-center'>
+        <div class='savedodds alert-warning text-center'>
             <h4 class="noarticles"> Uh Oh. Looks like we don't have any odds posted.</h4>
         </div>
         <div class="card">
@@ -104,10 +134,13 @@
             <p>Super Bowl Odds Mongo Scrapers</p>
         </div>
     </footer>
-    ​
+<script>
+        $("#prevent").click(function () {
+          preventDefault();
+        });
+</script>    ​
     ​
 </body>
 ​
 
 </html>
-
