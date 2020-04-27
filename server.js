@@ -132,16 +132,16 @@ app.get("/scrape", function (req, res) {
     app.post("/submit", function (req, res) {
 
 console.log("this has been hit ");
-console.log("this is what came back " + res.team + " ");
+console.log("this is what came back " + res.body + " ");
 
         db.odds.create(req.body)
 
-        
             .then(function (dbodds) {
 
-                return db.saved.findOneAndUpdate({}, {
+                return db.saved.create({}, {
                     $push: {
-                        odds: dbodds.team
+                        odds: dbodds.odds,
+                        team: dbodds.team
                     }
 
                 }, { new: true });
@@ -161,6 +161,8 @@ console.log("this is what came back " + res.team + " ");
         db.saved.find({})
             .then(function (dbSaved) {
                 res.json(dbSaved);
+                console.log("anyone?" + dbSaved)
+                console.log(dbSaved.team)
 
             })
             .catch(function (err) {
@@ -211,6 +213,8 @@ app.get("/odds", function (req, res) {
 
 app.get("/odds/:id", function (req, res) {
     db.odds.findOne({ _id: req.params.id })
+
+    console.log("does this get hit ? ? ? ")
 
         .populate("note")
         .then(function (dbodds) {

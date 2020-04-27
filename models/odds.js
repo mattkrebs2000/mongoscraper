@@ -7,12 +7,14 @@ var oddsSchema = new Schema({
 
     team: {
         type: String,
-        required: true,
+
+        // required: true,
     },
 
     odds: {
         type: String,
-        required: true
+
+        // required: true
     },
     note: {
         type: Schema.Types.ObjectId,
