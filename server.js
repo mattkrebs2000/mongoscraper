@@ -28,12 +28,8 @@ app.use(express.json());
 //this is also the HTML route for the file index.html
 app.use(express.static("public"));
 
-app.get("/notes", function (req, res) {
-    res.sendFile(__dirname + "/public/notespage.html")
-})
-app.get("/", function (req, res) {
-    res.sendFile(__dirname + "/public/index.html")
-})
+
+
 
 
 
