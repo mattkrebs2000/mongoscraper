@@ -8,7 +8,6 @@ var oddsSchema = new Schema({
     team: {
         type: String,
         required: true,
-
     },
 
     odds: {
@@ -21,6 +20,13 @@ var oddsSchema = new Schema({
 
     }
 });
+
+// oddsSchema.methods.newOdd = function () {
+
+//     this.odds = oddsSchema.odds;
+//     return this.odds; 
+// }
+
 
 var odds = mongoose.model("odds", oddsSchema);
 

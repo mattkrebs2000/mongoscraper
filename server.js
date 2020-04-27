@@ -42,6 +42,9 @@ mongoose.connect("mongodb://localhost/mongoscraperproject", { useUnifiedTopology
 
 var url = "mongodb://localhost/mongoscraperproject";
 
+// looking for updateMany
+
+
 app.get("/scrape", function (req, res) {
 
     mongoose.connect(url, function (err, db) {
@@ -51,6 +54,9 @@ app.get("/scrape", function (req, res) {
             if (err) throw err;
             console.log(obj.result.n + " document(s) deleted");
         });
+
+
+
     });
     var array = []
     axios.get("https://www.vegasinsider.com/nfl/odds/futures/").then(function
@@ -101,6 +107,7 @@ app.get("/scrape", function (req, res) {
         console.log(array)
         db.odds.create(array)
             .then(function (dbodds) {
+                console.log("hello  ...");
                 res.send(dbodds);
             })
             .catch(function (err) {
@@ -109,21 +116,82 @@ app.get("/scrape", function (req, res) {
 
     });
 
-
-    // $.getJSON("/odds", function(data) {
-    //  for (var i = 0; i< data.length; i ++) {
-    //      $(".alert").append("<p data-id='"+ data[i]._id + "'>" +data[i].team + "<br />" + data[i].odds + "</p>"); 
-
-    //  }
-    // });
-
-    //shouldnt it say this in the address bar?
-
-
-
-
-
 });
+
+
+    db.saved.create({ name: "saved odds" })
+        .then(function (dbSaved) {
+
+            console.log(dbSaved);
+        })
+        .catch(function (err) {
+            console.log(err.message);
+
+        });
+
+    app.post("/submit", function (req, res) {
+
+console.log("this has been hit ");
+console.log("this is what came back " + res.team + " ");
+
+        db.odds.create(req.body)
+
+        
+            .then(function (dbodds) {
+
+                return db.saved.findOneAndUpdate({}, {
+                    $push: {
+                        odds: dbodds.team
+                    }
+
+                }, { new: true });
+            })
+            .then(function (dbSaved) {
+                res.json(dbSaved);
+
+            })
+            .catch(function (err) {
+
+                res.json(err);
+            });
+    });
+
+    app.get("/saved", function (req, res) {
+
+        db.saved.find({})
+            .then(function (dbSaved) {
+                res.json(dbSaved);
+
+            })
+            .catch(function (err) {
+
+                res.json(err);
+            });
+    });
+
+    app.get("/populated", function(req,res){
+
+
+        db.saved.find({})
+
+        .populate("odds")
+        .then(function(dbSaved){
+            res.json(dbSaved);
+        })
+        .catch(function(err) {
+
+res.json(err);
+
+        });
+    });
+
+
+   
+
+
+
+
+
 
 app.get("/odds", function (req, res) {
 
@@ -270,7 +338,7 @@ app.listen(Port, function () {
 //                 });
 //         }
 //     });
-   
+
 
 // // $.getJSON("/odds", function(data) {
 // //  for (var i = 0; i< data.length; i ++) {
@@ -282,8 +350,8 @@ app.listen(Port, function () {
 //     //shouldnt it say this in the address bar?
 
 //     res.send("completed");
-    
-   
+
+
 
 // });
 

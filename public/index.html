@@ -28,29 +28,23 @@
     <nav id="nav2" class="navbar-dark navbar-success bg-transparent navbar-expand navigation-bar is-visible"
         data-nav-status="toggle">
         ​
-        <button id="navbarButton" class="navbar-toggler mr-auto custom-toggler" style="margin: 20px 0 0 20px;"
-            type="button" data-toggle="collapse" data-target="#nav3">
-            ​
-            <div class="navbar-toggler-icon"></div>
-        </button>
+       
         ​
         <div class="navbar-collapse collapse" id="nav3">
             <ul class="nav navbar-nav.navbar-right ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show"></a>
-                </li>
+                
                 ​
                 <li id="bottomLink" class="nav-item">
-                    <button id="bottomLink" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show"
-                        href="">Scrape Current
+                   <button class="menu" href="">Scrape Current
                         Odds</button>
                 </li>
                 ​
                 
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="/notes">Saved Odds</a>
+                
+                <li class="nav-item" >
+                    <button class="menu"><a href="#notes">Saved Odds</a></button>
                 </li>
-                </li>
+              
                 <!-- 
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse"
@@ -74,11 +68,12 @@
         <div class="overlay">
         </div>
         <div class="background-image">
-        </div>
-        <div class="caption">
+            <br>
+            <br>
             <h1>Mongo Scraper</h1>
             <p>Super Bowl Odds Edition</p>
         </div>
+       
     </div>
     <div class="container-fluid article-container">
         ​
@@ -87,15 +82,12 @@
         </div>
         <div class="card">
             <div class="card-header text-center">
-                <h3>What Would You Like To Do?</h3>
+               Saved Odds
+              
             </div>
             <div class="card-body text-center">
-                <h4>
-                    <a class="scrape-new">Try Updating Odds</a>
-                </h4>
-                <h4>
-                    <a href="/savedd">Go to Saved Comments</a>
-                </h4>
+                <div id="notes"></div>
+              
             </div>
         </div>
     </div>
