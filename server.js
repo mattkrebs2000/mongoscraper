@@ -156,6 +156,8 @@ app.get("/odds", function (req, res) {
 
 var newSavedArray =[];
 
+//This works and coincides with app.js line 55. But does not refresh automatically. 
+
 app.get("/odds/:id", function (req, res) {
     console.log(req.params.id)
     db.odds.findOne({ _id: req.params.id })
@@ -187,6 +189,7 @@ app.get("/odds/:id", function (req, res) {
 
 
             res.json(dbodds);
+            
         })
         .catch(function (err) {
 
@@ -195,14 +198,12 @@ app.get("/odds/:id", function (req, res) {
 });
 
 
+//This works and coincides with app.js line 74. But does not refresh automatically. 
 
 app.get("/saved/:id", function (req, res) {
     console.log(req.params.id)
-    db.odds.findOne({ _id: req.params.id })
+    db.saved.findOne({ _id: req.params.id })
 
-
-
-        // .populate("note")
         .then(function (dbodds) {
             var newSaved = {}
             newSaved.team = dbodds.team
@@ -214,7 +215,7 @@ app.get("/saved/:id", function (req, res) {
             //was 
             //db.saved.create(JSON.stringify(newSaved))
 
-            db.saved.create(newSavedArray)
+            db.saved.deleteOne(newSavedArray[0])
                 .then(function (result) {
                     console.log("hello  ...");
                     res.send(result + "this is the result");

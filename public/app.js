@@ -50,7 +50,9 @@ $(document).ready(function () {
     })
 
 
-//This is supposed to be linked to save buttons. 
+//This saves to the db and coincides with server.js line 161. 
+
+//This is supposed to be linked to save buttons. I can get a team to show up but want to reload with the new data. Where do I put the code see comment on line 67 that has it reload it? 
 
     $(document).on("click",".save",function(){
 
@@ -61,6 +63,9 @@ $(document).ready(function () {
             url: "/odds/" + thisId
         }).then(function (data) {
             for (var i = 0; i < data.length; i++) {
+
+//If this would refresh this would update the saved but it doesn't work. 
+
                 $("#savedones").append("<p data-id='" + data[i]._id + "'>" + data[i].team + "  " + data[i].odds + "	&nbsp;<button class ='delete' data-id='" + data[i]._id + "'>Delete</button> &nbsp; <button class ='makenote' data-id='" + data[i]._id + "'>Make a Note</button></p> <br/><br/><br/>");
             }
 
@@ -68,12 +73,15 @@ $(document).ready(function () {
         })
     })
 
+//This code also deletes from the database however I don't know where to put the refreshed Saved inventory. It doesn't refresh on click which I would like it to. 
 
     $(document).on("click", ".delete", function () {
 
+        var thisId = $(this).attr("data-id");
+
         $.ajax({
             method: "GET",
-            url: "saved"
+            url: "/saved/" + thisId
         }).then(function (data) {
             for (var i = 0; i < data.length; i++) {
                 $("#savedones").append("<p data-id='" + data[i]._id + "'>" + data[i].team + "  " + data[i].odds + "	&nbsp;<button class ='delete' data-id='" + data[i]._id + "'>Delete</button> &nbsp; <button class ='makenote' data-id='" + data[i]._id + "'>Make a Note</button></p> <br/><br/><br/>");
