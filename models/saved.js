@@ -9,13 +9,13 @@ var savedSchema = new Schema({
         type: String,
         unique: true
     },
-    odds: [
+    odds: 
         {
-            type:Schema.Types.ObjectId,
-            ref: "odds"
-        }
-
-    ]
+            type:String
+           
+        },
+   
+   
 });
 
 var saved = mongoose.model("saved", savedSchema);
