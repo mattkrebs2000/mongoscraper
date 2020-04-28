@@ -1,7 +1,11 @@
+require('dotenv').config();
+
 var express = require("express");
 var logger = require("morgan");
 
 var mongoose = require("mongoose");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/oddsscraper");
+
 
 //scraping tools
 
