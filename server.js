@@ -48,17 +48,7 @@ app.use(express.static("public"));
 
 app.get("/scrape", function (req, res) {
 
-    mongoose.connect(url, function (err, db) {
-        if (err) throw err;
-
-        db.collection("odds").remove(function (err, obj) {
-            if (err) throw err;
-            console.log(obj.result.n + " document(s) deleted");
-        });
-
-
-
-    });
+  
     var array = []
     axios.get("https://www.vegasinsider.com/nfl/odds/futures/").then(function
         (response) {
@@ -105,6 +95,11 @@ app.get("/scrape", function (req, res) {
             array.push(result)
 
         }
+        db.odds.remove(function (err, obj) {
+            if (err) throw err;
+            console.log(obj.result.n + " document(s) deleted");
+        });
+
         console.log(array)
         db.odds.create(array)
             .then(function (dbodds) {
