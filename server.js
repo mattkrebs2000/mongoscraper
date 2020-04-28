@@ -38,8 +38,8 @@ mongoose.connect("mongodb://localhost/mongoscraperproject", { useUnifiedTopology
 
 var url = "mongodb://localhost/mongoscraperproject";
 
-// looking for updateMany
 
+//This is showing up and seems to be working. See app.js Line 20.
 
 app.get("/scrape", function (req, res) {
 
@@ -115,42 +115,7 @@ app.get("/scrape", function (req, res) {
 });
 
 
-    // db.saved.create({ name: "saved odds" })
-    //     .then(function (dbSaved) {
-
-    //         console.log(dbSaved);
-    //     })
-    //     .catch(function (err) {
-    //         console.log(err.message);
-
-    //     });
-
-//     app.post("/submit", function (req, res) {
-
-// console.log("this has been hit ");
-// console.log("this is what came back " + res.body + " ");
-
-//         db.odds.create(req.body)
-
-//             .then(function (dbodds) {
-
-//                 return db.saved.create({}, {
-//                     $push: {
-//                         odds: dbodds.odds,
-//                         team: dbodds.team
-//                     }
-
-//                 }, { new: true });
-//             })
-//             .then(function (dbSaved) {
-//                 res.json(dbSaved);
-
-//             })
-//             .catch(function (err) {
-
-//                 res.json(err);
-//             });
-//     });
+//This is showing up and seems to be working on load. See app.js on load function.  app.js Line 4 
 
     app.get("/saved", function (req, res) {
 
@@ -158,7 +123,7 @@ app.get("/scrape", function (req, res) {
             .then(function (dbSaved) {
                 res.json(dbSaved);
                 console.log("anyone?" + dbSaved)
-                console.log(dbSaved.team)
+                console.log(dbSaved[0].team)
 
             })
             .catch(function (err) {
@@ -167,36 +132,16 @@ app.get("/scrape", function (req, res) {
             });
     });
 
-//     app.get("/populated", function(req,res){
-
-
-//         db.saved.find({})
-
-//         .populate("odds")
-//         .then(function(dbSaved){
-//             res.json(dbSaved);
-//         })
-//         .catch(function(err) {
-
-// res.json(err);
-
-//         });
-//     });
-
-
    
 
-
-
-
-
+//This is working at app.js Line 29. 
 
 app.get("/odds", function (req, res) {
 
     db.odds.find({})
 
         .then(function (dbodds) {
-            console.log("hey", dbodds[0])
+            console.log("hey hey hey", dbodds[0])
             res.json(dbodds);
 
         })
@@ -204,6 +149,10 @@ app.get("/odds", function (req, res) {
             res.json(err);
         });
 });
+
+
+
+
 
 var newSavedArray =[];
 

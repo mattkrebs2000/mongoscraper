@@ -1,6 +1,8 @@
 
 $(document).ready(function () {
 
+//This loads the page with saved odds coincides with Server.js line 120. 
+
    $.ajax({
     method: "GET",
     url: "saved"
@@ -15,7 +17,7 @@ $(document).ready(function () {
    })
 
 
-
+//This Gets and then brings the odds to browser. It coincides with server.js line 44 and line 139.
 
     $("#bottomLink").click(function () {
         $.ajax({
@@ -48,13 +50,15 @@ $(document).ready(function () {
     })
 
 
-
+//This is supposed to be linked to save buttons. 
 
     $(document).on("click",".save",function(){
 
+        var thisId = $(this).attr("data-id");
+
         $.ajax({
             method: "GET",
-            url: "saved"
+            url: "/odds/" + thisId
         }).then(function (data) {
             for (var i = 0; i < data.length; i++) {
                 $("#savedones").append("<p data-id='" + data[i]._id + "'>" + data[i].team + "  " + data[i].odds + "	&nbsp;<button class ='delete' data-id='" + data[i]._id + "'>Delete</button> &nbsp; <button class ='makenote' data-id='" + data[i]._id + "'>Make a Note</button></p> <br/><br/><br/>");
