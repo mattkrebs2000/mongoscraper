@@ -52,7 +52,7 @@ $(document).ready(function () {
 
 //This saves to the db and coincides with server.js line 161. 
 
-//This is supposed to be linked to save buttons. I can get a team to show up but want to reload with the new data. Where do I put the code see comment on line 67 that has it reload it? 
+//This is linked to save buttons. I can get a team to show up but want to reload with the new data. Where do I put the code see comment on line 67 that has it reload it? 
 
     $(document).on("click",".save",function(){
 
@@ -73,7 +73,7 @@ $(document).ready(function () {
         })
     })
 
-//This code also deletes from the database however I don't know where to put the refreshed Saved inventory. It doesn't refresh on click which I would like it to. 
+//This is linked to the delete buttons. This code also deletes from the database however I don't know where to put the refreshed Saved inventory. It doesn't refresh on click which I would like it to. 
 
     $(document).on("click", ".delete", function () {
 
