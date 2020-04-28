@@ -4,7 +4,8 @@ var express = require("express");
 var logger = require("morgan");
 
 var mongoose = require("mongoose");
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/oddsscraper");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/oddsscraper",{ useUnifiedTopology: true, useNewUrlParser: true });
+
 
 
 //scraping tools
@@ -38,9 +39,9 @@ app.use(express.static("public"));
 
 
 
-mongoose.connect("mongodb://localhost/mongoscraperproject", { useUnifiedTopology: true, useNewUrlParser: true });
 
-var url = "mongodb://localhost/mongoscraperproject";
+
+// var url = "mongodb://localhost/mongoscraperproject";
 
 
 //This is showing up and seems to be working. See app.js Line 20.
