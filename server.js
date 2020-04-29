@@ -299,7 +299,7 @@ app.use(express.static("public"));
 
 
 
-mongoose.connect("mongodb://localhost/oddsscraper", { useUnifiedTopology: true, useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost/oddsscraper", { useUnifiedTopology: true, useNewUrlParser: true });
 
 var url = "mongodb://localhost/oddsscraper";
 
