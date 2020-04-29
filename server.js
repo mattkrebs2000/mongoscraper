@@ -299,9 +299,9 @@ app.use(express.static("public"));
 
 
 
-mongoose.connect("mongodb://localhost/mongoscraperproject", { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/oddsscraper", { useUnifiedTopology: true, useNewUrlParser: true });
 
-var url = "mongodb://localhost/mongoscraperproject";
+var url = "mongodb://localhost/oddsscraper";
 
 
 //This is showing up and seems to be working. See app.js Line 20.
