@@ -310,7 +310,7 @@ var urll = process.env.MONGODB_URI;
 
 app.get("/scrape", function (req, res) {
 
-    mongoose.connect(url, urll, function (err, db) {
+    mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/oddsscraper", function (err, db) {
         if (err) throw err;
 
         db.collection("odds").remove(function (err, obj) {
