@@ -80,7 +80,7 @@ $(document).ready(function () {
         var thisId = $(this).attr("data-id");
 
         $.ajax({
-            method: "GET",
+            method: "DELETE",
             url: "/saved/" + thisId
         }).then(function (data) {
             for (var i = 0; i < data.length; i++) {

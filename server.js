@@ -484,16 +484,7 @@ app.get("/saved/:id", function (req, res) {
             //was 
             //db.saved.create(JSON.stringify(newSaved))
 
-            db.saved.deleteOne(newSavedArray[0])
-                .then(function (result) {
-                    console.log("hello  ...");
-                    res.send(result + "this is the result");
-                    res.json(newSaved);
-
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
+         
 
 
             res.json(dbodds);
@@ -504,6 +495,34 @@ app.get("/saved/:id", function (req, res) {
         })
 });
 
+app.delete("/saved/:id", function (req, res) {
+    console.log(req.params.id)
+    db.saved.findOne({ _id: req.params.id })
+
+        .then(function (dbodds) {
+            console.log("deleted")
+     })
+     .catch(function (err) {
+       console.log(err);
+     });
+    })
+
+
+
+
+
+
+//These were notes. 
+//    db.saved
+//      .deleteOne(newSavedArray[0])
+//      .then(function (result) {
+//        console.log("hello  ...");
+//        res.send(result + "this is the result");
+//        res.json(newSaved);
+//      })
+//      .catch(function (err) {
+//        console.log(err);
+//      });
 
 
 // app.post("/odds/:id", function (req, res) {
