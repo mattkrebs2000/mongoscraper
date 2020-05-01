@@ -80,15 +80,27 @@ $(document).ready(function () {
         var thisId = $(this).attr("data-id");
 
         $.ajax({
-            method: "DELETE",
-            url: "/saved/" + thisId
-        }).then(function (data) {
-            for (var i = 0; i < data.length; i++) {
-                $("#savedones").append("<p data-id='" + data[i]._id + "'>" + data[i].team + "  " + data[i].odds + "	&nbsp;<button class ='delete' data-id='" + data[i]._id + "'>Delete</button> &nbsp; <button class ='makenote' data-id='" + data[i]._id + "'>Make a Note</button></p> <br/><br/><br/>");
-            }
+            method: "GET",
+            url: "/deleteodds/" + thisId
+         }).then(function (data){
+          for (var i = 0; i < data.length; i++) {
+            $("#savedones").append(
+              "<p data-id='" +
+                data[i]._id +
+                "'>" +
+                data[i].team +
+                "  " +
+                data[i].odds +
+                "	&nbsp;<button class ='delete' data-id='" +
+                data[i]._id +
+                "'>Delete</button> &nbsp; <button class ='makenote' data-id='" +
+                data[i]._id +
+                "'>Make a Note</button></p> <br/><br/><br/>"
+            );
+          }
 
-            console.log("we have data + " + data);
-        })
+          console.log("we have data + " + data);
+        });
     })
 
 

@@ -495,17 +495,25 @@ app.get("/saved/:id", function (req, res) {
         })
 });
 
-app.delete("/saved/:id", function (req, res) {
-    console.log(req.params.id)
-    db.saved.findOne({ _id: req.params.id })
 
-        .then(function (dbodds) {
-            console.log("deleted")
-     })
-     .catch(function (err) {
-       console.log(err);
-     });
-    })
+
+app.get("/deleteodds/:id", function (req, res) {
+    console.log("this has been found" + req.params.id)
+    db.saved.findOne({ _id: req.params.id })
+    .then(function (savedss) {
+      console.log("this is the item" + savedss);
+      if (!savedss) {
+        res.send(false);
+      } else {
+        db.saved
+          .deleteOne(savedss)
+          .then(function (data) {
+           
+          });
+      }
+    });
+});
+
 
 
 
