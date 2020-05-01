@@ -268,6 +268,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/oddsscraper",{ 
 
 
 
+
+
 //scraping tools
 
 var axios = require("axios");
@@ -302,13 +304,13 @@ app.use(express.static("public"));
 // mongoose.connect("mongodb://localhost/oddsscraper", { useUnifiedTopology: true, useNewUrlParser: true });
 
 var url = "mongodb://localhost/oddsscraper";
-
+var urll = process.env.MONGODB_URI;
 
 //This is showing up and seems to be working. See app.js Line 20.
 
 app.get("/scrape", function (req, res) {
 
-    mongoose.connect(url, function (err, db) {
+    mongoose.connect(url, urll, function (err, db) {
         if (err) throw err;
 
         db.collection("odds").remove(function (err, obj) {
@@ -446,6 +448,7 @@ app.get("/odds/:id", function (req, res) {
                     console.log("hello  ...");
                     res.send(result + "this is the result");
                     res.json(newSaved);
+                     
 
                 })
                 .catch(function (err) {
@@ -454,11 +457,12 @@ app.get("/odds/:id", function (req, res) {
 
 
             res.json(dbodds);
+            location.reload();
 
         })
         .catch(function (err) {
 
-            res.json(err);
+          
         })
 });
 
