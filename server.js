@@ -382,7 +382,7 @@ app.get("/scrape", function (req, res) {
 });
 
 
-//This is showing up and seems to be working on load. See app.js on load function.  app.js Line 4 
+//This GET SAVED is showing up and seems to be working on load. See app.js on load function.  app.js Line 4 
 
 app.get("/saved", function (req, res) {
 
@@ -401,7 +401,7 @@ app.get("/saved", function (req, res) {
 
 
 
-//This is working at app.js Line 29. 
+//This is GET from SCRAPE working at app.js Line 29. 
 
 app.get("/odds", function (req, res) {
 
@@ -423,7 +423,7 @@ app.get("/odds", function (req, res) {
 
 var newSavedArray = [];
 
-//This works and coincides with app.js line 55. But does not refresh automatically. 
+//This GET AND SAVE works and coincides with app.js line 55. But does not refresh automatically. 
 
 app.get("/odds/:id", function (req, res) {
     console.log(req.params.id)
@@ -431,7 +431,7 @@ app.get("/odds/:id", function (req, res) {
 
 
 
-        // .populate("note")
+        // .populate("saved")
         .then(function (dbodds) {
             var newSaved = {}
             newSaved.team = dbodds.team
@@ -467,43 +467,19 @@ app.get("/odds/:id", function (req, res) {
 });
 
 
-//This works and coincides with app.js line 74. But does not refresh automatically. 
-
-app.get("/saved/:id", function (req, res) {
-    console.log(req.params.id)
-    db.saved.findOne({ _id: req.params.id })
-
-        .then(function (dbodds) {
-            var newSaved = {}
-            newSaved.team = dbodds.team
-            newSaved.odds = dbodds.odds
-
-            console.log(newSaved)
-            newSavedArray.push(newSaved)
-
-            //was 
-            //db.saved.create(JSON.stringify(newSaved))
-
-         
 
 
-            res.json(dbodds);
-        })
-        .catch(function (err) {
-
-            res.json(err);
-        })
-});
-
-
+//THis GET AND DELETE route works and coincides with the function on app.js line 78. 
 
 app.get("/deleteodds/:id", function (req, res) {
     console.log("this has been found" + req.params.id)
     db.saved.findOne({ _id: req.params.id })
     .then(function (savedss) {
       console.log("this is the item" + savedss);
+    
       if (!savedss) {
         res.send(false);
+        
       } else {
         db.saved
           .deleteOne(savedss)
@@ -512,44 +488,100 @@ app.get("/deleteodds/:id", function (req, res) {
           });
       }
     });
+
 });
-
-
-
-
-
-
-
-//These were notes. 
-//    db.saved
-//      .deleteOne(newSavedArray[0])
-//      .then(function (result) {
-//        console.log("hello  ...");
-//        res.send(result + "this is the result");
-//        res.json(newSaved);
-//      })
-//      .catch(function (err) {
-//        console.log(err);
-//      });
-
-
-// app.post("/odds/:id", function (req, res) {
-
-//     db.note.create(req.body)
-//         .then(function (dbnote) {
-
-//             return db.odds.findOneAndUpdate({ _id: req.params.id }, { note: dbodds._id }, { new: true });
-//         })
-//         .then(function (dbodds) {
-//             res.json(dbodds);
-//         })
-//         .catch(function (err) {
-//             res.json(err);
-//         });
-// });
 
 
 
 app.listen(Port, function () {
     console.log("App running on port " + Port);
 })
+
+
+//This is the POST route for submitting notes. "/submit" is alluded to in the html of the button. 
+
+app.post("/submit", function (req,res) {
+
+db.note.create(req.body)
+.then(function(dbNote){
+    console.log("Here is a NOTE" +dbNote)
+    
+
+return db.saved.findOneAndUpdate(
+  {},
+  { $push: { notes: dbNote.title} },
+  { new: true }
+);
+    })
+    .then(function(dbSaved){
+        console.log("Look here" + dbSaved);
+
+        res.json(dbSaved);
+
+    })
+    .catch(function(err) {
+        res.json(err);
+
+    });
+});
+
+app.get("/notes", function(req,res){
+
+console.log("excel" + res);
+db.note.find({})
+.then(function(dbnote){
+
+    res.json(dbnote)
+
+    .catch(function(err){
+
+        res.json(err);
+    });
+
+
+});
+
+})
+
+
+// app.get("/makeanote/:team",function(req,res){
+//    db.note.create(req.body)
+//  console.log("Its here " + req.params.team + req.params.odds)
+//     .then(function (note) {
+//       console.log("this is the item" + note);
+    
+      
+           
+//           });
+//         });
+  
+
+
+
+
+
+// app.get("/saved/:id", function (req, res) {
+//     console.log(req.params.id)
+//     db.saved.findOne({ _id: req.params.id })
+
+//         .then(function (dbodds) {
+//             var newSaved = {}
+//             newSaved.team = dbodds.team
+//             newSaved.odds = dbodds.odds
+
+//             console.log(newSaved)
+//             newSavedArray.push(newSaved)
+
+//             //was 
+//             //db.saved.create(JSON.stringify(newSaved))
+
+         
+
+
+//             res.json(dbodds);
+//         })
+//         .catch(function (err) {
+
+//             res.json(err);
+//         })
+// });

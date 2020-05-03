@@ -10,9 +10,12 @@
 
     <meta name="viewport" content="width=1, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   
+
+    
     <script src="app.js"></script>
     <link href="./css/css.css" rel="stylesheet" type="text/css" />
     <title>Mongo Scraper</title>
@@ -25,46 +28,66 @@
 ​
 
 <body>
-    <nav id="nav2" class="navbar-dark navbar-success bg-transparent navbar-expand navigation-bar is-visible"
-        data-nav-status="toggle">
-        ​
-       
-        ​
-        <div class="navbar-collapse collapse" id="nav3">
-            <ul class="nav navbar-nav.navbar-right ml-auto">
-                
-                ​
-                <li id="bottomLink" class="nav-item">
-                   <button class="menu" href="">Scrape Current
-                        Odds</button>
-                </li>
-                ​
-                
-                
-                <li class="nav-item" >
-                    <button class="menu"><a href="#linktosaved">Saved Odds</a></button>
-                </li>
-              
-                <!-- 
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse"
-                    data-target=".navbar-collapse.show">Saved</a>
-            </li> -->
-                ​
 
-                ​
-            </ul>
-            ​
-            <div id="odds-area"></div>
+
+<div class="matchModal" class="d-flex justify-content-center">
+    <div id="matchModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="content">
+            <div class="modal-content" style="width: 500px;  margin-left:auto; margin-right:auto;">
+                <div class="modal-header" style="background:black;">
+                    <h1 class="modal-title" style="color:blue;float: left;"> Notes</h1>
+                    <button id="clearButton" type="button" class="close" data-dismiss="modal"
+                        style="color:green; float: right;">&times;</button>
+                </div>
+                <div class="modal-body" style="width:500px; background-color:green; color:black;">
+                    <div class="d-flex justify-content-center">
+                        <div class="container" style="width:450px;">
+                            <div class="row row-content" style="width:450px;">
+                                <div class="col" style="width:450px;">
+                                    <div class="modal-body" style="text-align: left; color:blue;">
+                                       
+                                        <form style= "text-align: center; width:auto; color:blue;" action= "/submit" method="post">
+                                            <h3>Hi User!
+                                            - Enter a Note!</h3>
+                                            <input id="title" type="text" name="title" placeholder="Title"><br><br>
+                                            <textarea id="text" type="text" name="body" placeholder="Write Note Here"></textarea><br>
+                                        
+                                            <input type="submit">
+                                            </form>
+                                            <br>
+
+                                     
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                            style="color:dodgerblue; background-color: black;">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </nav>
-    ​
-    ​
-    ​
-    ​
-    ​
+    </div>
+</div>
+
+
     ​
     <div class="jumbotron text-center">
+
+                    <span id="top">
+                        <button id="bottomLink" class="menu" href="">Scrape Current
+                            Odds</button>
+                    
+                        ​
+                    
+                        <button class="menu"><a href="#linktosaved">Saved Odds</a></button>
+                    </span>
+
         <div class="overlay">
         </div>
         <div class="background-image">
@@ -100,7 +123,7 @@
     ​
     ​
 </body>
-​
+
 
 </html>
 

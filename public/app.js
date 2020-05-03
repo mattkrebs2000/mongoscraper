@@ -7,8 +7,24 @@ $(document).ready(function () {
     method: "GET",
     url: "saved"
    }).then(function(data) {
+
+    console.log("Each of you" + data);
+
        for (var i = 0; i < data.length; i++) {
-           $("#savedones").append("<p data-id='" + data[i]._id + "'>" + data[i].team + "  " + data[i].odds + "	&nbsp;<button class ='delete' data-id='" + data[i]._id + "'>Delete</button> &nbsp; <button class ='makenote' data-id='" + data[i]._id + "'>Make a Note</button></p> <br/><br/><br/>");
+           $("#savedones").append(
+             "<p data-id='" +
+               data[i]._id +
+               "'>" +
+               data[i].team +
+               "  " +
+               data[i].odds +
+               "	&nbsp;<button class ='delete' data-id='" +
+               data[i]._id +
+               "'>Delete</button> &nbsp; <button class ='makenote' data-id='" +
+               data[i]._id +
+               "'>Make a Note</button></p> <br/><br/><br/>" +
+               data[i].notes
+           );
        }
 
     console.log("we have data + " + data);
@@ -66,7 +82,20 @@ $(document).ready(function () {
 
 //If this would refresh this would update the saved but it doesn't work. 
 
-                $("#savedones").append("<p data-id='" + data[i]._id + "'>" + data[i].team + "  " + data[i].odds + "	&nbsp;<button class ='delete' data-id='" + data[i]._id + "'>Delete</button> &nbsp; <button class ='makenote' data-id='" + data[i]._id + "'>Make a Note</button></p> <br/><br/><br/>");
+                $("#savedones").append(
+                  "<p data-id='" +
+                    data[i]._id +
+                    "'>" +
+                    data[i].team +
+                    "  " +
+                    data[i].odds +
+                    "	&nbsp;<button class ='delete' data-id='" +
+                    data[i]._id +
+                    "'>Delete</button> &nbsp; <button class ='makenote' data-id='" +
+                    data[i]._id +
+                    "'>Make a Note</button></p> <br/><br/><br/>" +
+                    data[i].notes
+                );
             }
 
             console.log("we have data + " + data);
@@ -93,9 +122,10 @@ $(document).ready(function () {
                 data[i].odds +
                 "	&nbsp;<button class ='delete' data-id='" +
                 data[i]._id +
-                "'>Delete</button> &nbsp; <button class ='makenote' data-id='" +
-                data[i]._id +
-                "'>Make a Note</button></p> <br/><br/><br/>"
+                "'>Delete</button> &nbsp; <button class ='makenote' data-team='" +
+                data[i].team +
+                "'>Make a Note</button></p> <br/><br/><br/>" +
+                data[i].notes
             );
           }
 
@@ -104,7 +134,56 @@ $(document).ready(function () {
     })
 
 
+ $(document).on("click", ".makenote", function () {
+
+      var thisTeam = $(this).attr("data-id");
+      console.log("this is here " + thisTeam);
+
+      $.ajax({
+        method: "GET",
+        url: "/notes" 
+      }).then(function (data) {
+        for (var i = 0; i < data.length; i++) {
+      
+// dump in modal
+          $("#notes").append(
+            "<p data-id='" +
+              data[i]._id +
+              "'>" +
+              data[i].team +
+              "  " +
+              data[i].odds +
+              "	&nbsp;<button class ='delete' data-id='" +
+              data[i]._id +
+              "'>Delete</button> &nbsp; <button class ='makenote' data-team='" +
+              data[i].team +
+              "'>Make a Note</button></p> <br/><br/><br/>" +
+              data[i].notes
+          );
+        }
+
+        console.log("we have data + " + data);
+      });
 
 
-})
+
+ function showModal() {
+   $("#matchModal").modal("show");
+ }
+ showModal();
+
+
+
+    });
+
+
+
+
+ 
+
+  
+
+ });
+
+
 

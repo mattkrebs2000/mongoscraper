@@ -14,6 +14,16 @@ var savedSchema = new Schema({
             type:String
            
         },
+
+    notes: [
+        {
+            // type:Schema.Types.ObjectId,
+            // ref: "note"
+
+        }
+
+
+    ]
    
    
 });
