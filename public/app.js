@@ -145,7 +145,7 @@ $(document).ready(function () {
       }).then(function (data) {
         for (var i = 0; i < data.length; i++) {
       
-// dump in modal
+
           $("#notes").append(
             "<p data-id='" +
               data[i]._id +

@@ -15,17 +15,17 @@ var savedSchema = new Schema({
            
         },
 
-    notes: [
+    notes: 
         {
+           
             // type:Schema.Types.ObjectId,
             // ref: "note"
 
         }
 
+    
 
-    ]
-   
-   
+    
 });
 
 var saved = mongoose.model("saved", savedSchema);

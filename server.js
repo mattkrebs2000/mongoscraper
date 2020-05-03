@@ -509,7 +509,7 @@ db.note.create(req.body)
 
 return db.saved.findOneAndUpdate(
   {},
-  { $push: { notes: dbNote.title} },
+  { $push: {notes: dbNote.title } },
   { new: true }
 );
     })
