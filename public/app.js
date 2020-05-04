@@ -156,10 +156,11 @@ $(document).on("click","#enter", function(){
     $.ajax({
 
         method: "POST",
-        url: "/saved/" + thisId,
+        url: "/submit",
         data: {
             title: $("#title").val(),
-            body:$("#text").val()
+            body:$("#text").val(),
+            id: thisId
         }
        
     })
@@ -175,27 +176,27 @@ $(document).on("click","#enter", function(){
 
 
 
-$(document).on("click", "#enter", function () {
-  var thisId = $(this).attr("data-id");
+// $(document).on("click", "#enter", function () {
+//   var thisId = $(this).attr("data-id");
 
-  console.log("Can you see this" + thisId);
+//   console.log("Can you see this" + thisId);
 
-  $.ajax({
+//   $.ajax({
 
-        method: "GET",
-        url: "/notes/" + thisId,
+//         method: "GET",
+//         url: "/notes/" + thisId,
         
-    })
+//     })
 
-    .then(function(data){
+//     .then(function(data){
 
-      console.log("these are the teams comments" + data)
+//       console.log("these are the teams comments" + data)
 
 
-    })
-    $("#buttonhere").html("");
+//     })
+//     $("#buttonhere").html("");
 
-});
+// });
 
 
 

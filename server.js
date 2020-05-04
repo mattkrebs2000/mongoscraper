@@ -235,31 +235,31 @@ app.get("/deleteodds/:id", function (req, res) {
 
 //This is the POST route for submitting notes. "/submit" is alluded to in the html of thae button. This works but only posts to one team. Doesn't post to different teams based on the button you click. I took out the HTML that corresponded to this post request
 
-// app.post("/submit", function (req,res) {
+app.post("/submit", function (req,res) {
 
-// db.note.create(req.body)
-// .then(function(dbNote){
-//     console.log("Here is a NOTE" +dbNote)
-//     var title = dbNote.title;
-//     var body = dbNote.body; 
+db.note.create(req.body)
+.then(function(dbNote){
+    console.log("Here is a NOTE" +dbNote)
+    var title = dbNote.title;
+    var body = dbNote.body; 
 
-// return db.saved.findOneAndUpdate(
-//   {_id:req.params.id},
-//   { $push: { notes: title, notes:body } },
-//   { new: true }
-// );
-//     })
-//     .then(function(dbSaved){
-//         console.log("Look here" + dbSaved);
+return db.saved.findOneAndUpdate(
+  {_id:req.body.id},
+  { $push: { notes: title, notes:body } },
+  { new: true }
+);
+    })
+    .then(function(dbSaved){
+        console.log("Look here" + dbSaved);
 
-//         res.json(dbSaved);
+        res.json(dbSaved);
 
-//     })
-//     .catch(function(err) {
-//     res.json(err);
+    })
+    .catch(function(err) {
+    res.json(err);
 
-//     });
-// });
+    });
+});
 
 app.get("/notes", function(req,res){
 
@@ -324,74 +324,79 @@ app.get("/saved/:id", function (req, res) {
 });
 
 
-app.post("/saved/:id",function(req,res){
+// app.post("/saved/:id",function(req,res){
 
-db.note.create(req.body)
-.then(function(dbnote){
+// db.note.create(req.body)
+// .then(function(dbnote){
 
-    return db.note.findOneAndUpdate(
-      { _id: req.params.id },
-      { note: dbnote._id },
-      { new: true }
-    );
-
-
-
-})
-.then(function(dbsaved){
-
-    console.log("Is it alive " + dbsaved);
-
-})
-.catch(function(err){
-
-    res.json(err);
-});
-
-});
+//     return db.note.findOneAndUpdate(
+//       { _id: req.params.id },
+//       { note: dbnote._id },
+//       { new: true }
+//     );
 
 
 
+// })
+// .then(function(dbsaved){
 
-app.get("/notes/:id", function (req, res) {
-  console.log(req.params.id);
-  db.note
-    .find({ _id: req.params.id })
+//     console.log("Is it alive " + dbsaved);
 
+// })
+// .catch(function(err){
 
-    .then(function (notes) {
-     console.log(notes)
-    })
-    .catch(function (err) {
-      res.json(err);
-    });
-});
+//     res.json(err);
+// });
+
+// });
 
 
-app.post("/submit", function(req,res){
+
+
+// app.get("/notes/:id", function (req, res) {
+//   console.log(req.params.id);
+//   db.note
+//     .find({ _id: req.params.id })
+
+
+//     .then(function (notes) {
+//      console.log(notes)
+//     })
+//     .catch(function (err) {
+//       res.json(err);
+//     });
+// });
+
+//attributes to a specific team. 
+
+// app.post("/submit", function(req,res){
  
-    var thisId = $(this).attr("data-id");
+//     // var thisId = $(this).attr("data-id");
+// console.log("something" + req.body)
 
-    db.note.create(req.body)
-    .then(function(dbnote) {
+//     db.note.create(req.body)
+//     .then(function(dbnote) {
+//         console.log("this is somethign" + dbnote);
 
-        return db.saved.findOneAndUpdate(
-            {id: thisId},
-            {$push:{note:dbnote.body}},
-            {new:true}
-        );
-    })
-    .then(function(dbsaved){
+//         return db.saved.findOneAndUpdate(
+//             {id: thisId},
+//             {$push:{note:dbnote.body}},
+//             {new:true}
+//         );
+        
+//     })
+//     .then(function(dbsaved){
 
 
-        res.json(dbsaved);
-    })
-    .catch(function (err){
+//         res.json(dbsaved);
+//          console.log("saved" + dbsaved);
+      
+//     })
+//     .catch(function (err){
 
-    });
-    console.log("saved" + dbsaved);
-    console.log("note"+ dbnote);
-});
+//     });
+   
+// });
 
 
 

@@ -9,7 +9,8 @@ var noteSchema = new Schema({
     body: String,
     id:String,
     team: String,
-    odds: String
+    odds: String,
+    saved:{ type:Schema.Types.ObjectId, ref:"saved"}
 });
 
 var note = mongoose.model("note", noteSchema);
