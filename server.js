@@ -1,263 +1,3 @@
-// require('dotenv').config();
-
-// var express = require("express");
-// var logger = require("morgan");
-
-// var mongoose = require("mongoose");
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/oddsscraper",{ useUnifiedTopology: true, useNewUrlParser: true });
-
-
-
-// //scraping tools
-
-// var axios = require("axios");
-// var cheerio = require("cheerio");
-
-// //Requiring all models
-
-// var db = require("./models");
-
-// const Port = process.env.PORT || 3000;
-
-// var app = express();
-
-// app.use(logger("dev"));
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-// //make a "public" a static folder
-
-
-
-
-
-// //this is also the HTML route for the file index.html
-// app.use(express.static("public"));
-
-
-
-
-
-
-
-
-
-// // var url = "mongodb://localhost/mongoscraperproject";
-
-
-// //This is showing up and seems to be working. See app.js Line 20.
-
-// app.get("/scrape", function (req, res) {
-
-  
-//     var array = []
-//     axios.get("https://www.vegasinsider.com/nfl/odds/futures/").then(function
-//         (response) {
-//         var $ = cheerio.load(response.data);
-//         var teamResults = [];
-//         var oddsResults = [];
-//         var teamandodds = [];
-
-//         $("td.font-bold").each(function (j, element) {
-
-//             var team = $(element).text();
-//             teamResults.push({
-//                 team: team
-//             });
-
-//         });
-
-//         $("td.last").each(function (i, elements) {
-//             var odds = $(elements).text();
-//             oddsResults.push({
-//                 odds: odds
-//             });
-
-//             // db.odds.create(oddsResults[i])
-//             //     .then(function (dbodds) {
-//             //         console.log(dbodds);
-//             //     })
-//             //     .catch(function (err) {
-//             //         console.log(err);
-//             //     });
-
-//         });
-
-
-//         for (k = 0; k < 32; k++) {
-//             var result = {};
-//             teamandodds.push(teamResults[k].team +
-//                 ": " + oddsResults[k].odds)
-
-//             //    console.log(teamandodds);
-
-//             result.team = teamResults[k].team;
-//             result.odds = oddsResults[k].odds;
-//             array.push(result)
-
-//         }
-//         db.odds.remove(function (err, obj) {
-//             if (err) throw err;
-//             console.log(obj.result.n + " document(s) deleted");
-//         });
-
-//         console.log(array)
-//         db.odds.create(array)
-//             .then(function (dbodds) {
-//                 console.log("hello  ...");
-//                 res.send(dbodds);
-//             })
-//             .catch(function (err) {
-//                 console.log(err);
-//             });
-
-//     });
-
-// });
-
-
-// //This is showing up and seems to be working on load. See app.js on load function.  app.js Line 4 
-
-//     app.get("/saved", function (req, res) {
-
-//         db.saved.find({})
-//             .then(function (dbSaved) {
-//                 res.json(dbSaved);
-//                 console.log("anyone?" + dbSaved)
-//                 console.log(dbSaved[0].team)
-
-//             })
-//             .catch(function (err) {
-
-//                 res.json(err);
-//             });
-//     });
-
-   
-
-// //This is working at app.js Line 29. 
-
-// app.get("/odds", function (req, res) {
-
-//     db.odds.find({})
-
-//         .then(function (dbodds) {
-//             console.log("hey hey hey", dbodds[0])
-//             res.json(dbodds);
-
-//         })
-//         .catch(function (err) {
-//             res.json(err);
-//         });
-// });
-
-
-
-
-
-// var newSavedArray =[];
-
-// //This works and coincides with app.js line 55. But does not refresh automatically. 
-
-// app.get("/odds/:id", function (req, res) {
-//     console.log(req.params.id)
-//     db.odds.findOne({ _id: req.params.id })
-
-
-
-//         // .populate("note")
-//         .then(function (dbodds) {
-//             var newSaved ={}
-//             newSaved.team=dbodds.team
-//             newSaved.odds=dbodds.odds
-            
-//             console.log("here is a new one"+ newSaved)
-//             newSavedArray.push(newSaved)
-
-//             //was 
-//             //db.saved.create(JSON.stringify(newSaved))
-           
-//             db.saved.create(newSavedArray)
-//                 .then(function (result) {
-//                     console.log("hello  ...");
-//                     res.send(result + "this is the result");
-//                     res.json(newSaved);
-                  
-//                 })
-//                 .catch(function (err) {
-//                     console.log(err);
-//                 });
-
-
-//             res.json(dbodds);
-            
-//         })
-//         .catch(function (err) {
-
-//             res.json(err);
-//         })
-// });
-
-
-// //This works and coincides with app.js line 74. But does not refresh automatically. 
-
-// app.get("/saved/:id", function (req, res) {
-//     console.log(req.params.id)
-//     db.saved.findOne({ _id: req.params.id })
-
-//         .then(function (dbodds) {
-//             var newSaved = {}
-//             newSaved.team = dbodds.team
-//             newSaved.odds = dbodds.odds
-
-//             console.log(newSaved)
-//             newSavedArray.push(newSaved)
-
-//             //was 
-//             //db.saved.create(JSON.stringify(newSaved))
-
-//             db.saved.deleteOne(newSavedArray[0])
-//                 .then(function (result) {
-//                     console.log("hello  ...");
-//                     res.send(result + "this is the result");
-//                     res.json(newSaved);
-
-//                 })
-//                 .catch(function (err) {
-//                     console.log(err);
-//                 });
-
-
-//             res.json(dbodds);
-//         })
-//         .catch(function (err) {
-
-//             res.json(err);
-//         })
-// });
-
-
-
-// // app.post("/odds/:id", function (req, res) {
-
-// //     db.note.create(req.body)
-// //         .then(function (dbnote) {
-
-// //             return db.odds.findOneAndUpdate({ _id: req.params.id }, { note: dbodds._id }, { new: true });
-// //         })
-// //         .then(function (dbodds) {
-// //             res.json(dbodds);
-// //         })
-// //         .catch(function (err) {
-// //             res.json(err);
-// //         });
-// // });
-
-
-
-// app.listen(Port, function () {
-//     console.log("App running on port " + Port);
-// })
-
 require('dotenv').config();
 
 var express = require("express");
@@ -265,10 +5,6 @@ var logger = require("morgan");
 
 var mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/oddsscraper",{ useUnifiedTopology: true, useNewUrlParser: true });
-
-
-
-
 
 //scraping tools
 
@@ -382,26 +118,28 @@ app.get("/scrape", function (req, res) {
 });
 
 
-//This GET SAVED is showing up and seems to be working on load. See app.js on load function.  app.js Line 4 
+//This Get route works (verified in the node console) AND is required in order for the "Saved" odds to show up --- connected to app.js line 6. 
 
 app.get("/saved", function (req, res) {
 
     db.saved.find({})
         .then(function (dbSaved) {
             res.json(dbSaved);
-            console.log("anyone?" + dbSaved)
-            console.log(dbSaved[0].team)
+            console.log("anyone?" + dbSaved);
+            console.log(dbSaved[0].team);
+            console.log("Check A ");
 
         })
         .catch(function (err) {
 
             res.json(err);
         });
+        
 });
 
 
 
-//This is GET from SCRAPE working at app.js Line 29. 
+//This is GET from SCRAPE working at app.js Line 53. 
 
 app.get("/odds", function (req, res) {
 
@@ -423,7 +161,7 @@ app.get("/odds", function (req, res) {
 
 var newSavedArray = [];
 
-//This GET AND SAVE works and coincides with app.js line 55. But does not refresh automatically. 
+//This GET AND SAVE works and coincides with app.js line 79. But does not refresh automatically. 
 
 app.get("/odds/:id", function (req, res) {
     console.log(req.params.id)
@@ -469,7 +207,7 @@ app.get("/odds/:id", function (req, res) {
 
 
 
-//THis GET AND DELETE route works and coincides with the function on app.js line 78. 
+//THis GET AND DELETE route works and coincides with the function on app.js line 117. 
 
 app.get("/deleteodds/:id", function (req, res) {
     console.log("this has been found" + req.params.id)
@@ -493,37 +231,35 @@ app.get("/deleteodds/:id", function (req, res) {
 
 
 
-app.listen(Port, function () {
-    console.log("App running on port " + Port);
-})
 
 
-//This is the POST route for submitting notes. "/submit" is alluded to in the html of the button. 
+//This is the POST route for submitting notes. "/submit" is alluded to in the html of thae button. This works but only posts to one team. Doesn't post to different teams based on the button you click. I took out the HTML that corresponded to this post request
 
-app.post("/submit", function (req,res) {
+// app.post("/submit", function (req,res) {
 
-db.note.create(req.body)
-.then(function(dbNote){
-    console.log("Here is a NOTE" +dbNote)
-    
+// db.note.create(req.body)
+// .then(function(dbNote){
+//     console.log("Here is a NOTE" +dbNote)
+//     var title = dbNote.title;
+//     var body = dbNote.body; 
 
-return db.saved.findOneAndUpdate(
-  {},
-  { $push: {notes: dbNote.title } },
-  { new: true }
-);
-    })
-    .then(function(dbSaved){
-        console.log("Look here" + dbSaved);
+// return db.saved.findOneAndUpdate(
+//   {_id:req.params.id},
+//   { $push: { notes: title, notes:body } },
+//   { new: true }
+// );
+//     })
+//     .then(function(dbSaved){
+//         console.log("Look here" + dbSaved);
 
-        res.json(dbSaved);
+//         res.json(dbSaved);
 
-    })
-    .catch(function(err) {
-        res.json(err);
+//     })
+//     .catch(function(err) {
+//     res.json(err);
 
-    });
-});
+//     });
+// });
 
 app.get("/notes", function(req,res){
 
@@ -560,28 +296,109 @@ db.note.find({})
 
 
 
-// app.get("/saved/:id", function (req, res) {
-//     console.log(req.params.id)
-//     db.saved.findOne({ _id: req.params.id })
+app.get("/saved/:id", function (req, res) {
+    console.log(req.params.id)
+    db.saved.findOne({ _id: req.params.id })
 
-//         .then(function (dbodds) {
-//             var newSaved = {}
-//             newSaved.team = dbodds.team
-//             newSaved.odds = dbodds.odds
-
-//             console.log(newSaved)
-//             newSavedArray.push(newSaved)
-
-//             //was 
-//             //db.saved.create(JSON.stringify(newSaved))
-
-         
+        .populate("note")
 
 
-//             res.json(dbodds);
-//         })
-//         .catch(function (err) {
+        .then(function (dbodds) {
+            var newSaved = {}
+            newSaved.team = dbodds.team
+            newSaved.odds = dbodds.odds
+            newSaved.note = dbodds.note
 
-//             res.json(err);
-//         })
-// });
+            console.log(newSaved)
+            newSavedArray.push(newSaved)
+
+           
+            db.saved.create(JSON.stringify(newSaved))
+        
+            res.json(newSaved);
+        })
+        .catch(function (err) {
+
+            res.json(err);
+        })
+});
+
+
+app.post("/saved/:id",function(req,res){
+
+db.note.create(req.body)
+.then(function(dbnote){
+
+    return db.note.findOneAndUpdate(
+      { _id: req.params.id },
+      { note: dbnote._id },
+      { new: true }
+    );
+
+
+
+})
+.then(function(dbsaved){
+
+    console.log("Is it alive " + dbsaved);
+
+})
+.catch(function(err){
+
+    res.json(err);
+});
+
+});
+
+
+
+
+app.get("/notes/:id", function (req, res) {
+  console.log(req.params.id);
+  db.note
+    .find({ _id: req.params.id })
+
+
+    .then(function (notes) {
+     console.log(notes)
+    })
+    .catch(function (err) {
+      res.json(err);
+    });
+});
+
+
+app.post("/submit", function(req,res){
+ 
+    var thisId = $(this).attr("data-id");
+
+    db.note.create(req.body)
+    .then(function(dbnote) {
+
+        return db.saved.findOneAndUpdate(
+            {id: thisId},
+            {$push:{note:dbnote.body}},
+            {new:true}
+        );
+    })
+    .then(function(dbsaved){
+
+
+        res.json(dbsaved);
+    })
+    .catch(function (err){
+
+    });
+    console.log("saved" + dbsaved);
+    console.log("note"+ dbnote);
+});
+
+
+
+
+
+
+
+app.listen(Port, function () {
+  console.log("App running on port " + Port);
+});

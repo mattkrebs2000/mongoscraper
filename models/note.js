@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 var noteSchema = new Schema({
     title: String,
     body: String,
+    id:String,
     team: String,
     odds: String
 });

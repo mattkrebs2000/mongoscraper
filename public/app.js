@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
 
-//This loads the page with saved odds coincides with Server.js line 120. 
+//This loads the page with saved odds coincides with Server.js line 123. It is required in order for the "Saveds" to show up on load. 
 
    $.ajax({
     method: "GET",
@@ -22,18 +22,24 @@ $(document).ready(function () {
                data[i]._id +
                "'>Delete</button> &nbsp; <button class ='makenote' data-id='" +
                data[i]._id +
-               "'>Make a Note</button></p> <br/><br/><br/>" +
+               "'>Make a Note</button></p><br/>" +
                data[i].notes
            );
+          
+            // for (var j=0; j<data[i].notes.length; j++){
+            //     $("#savedones").append("<br/> title: " + data[i].notes[j]+".");
+
+            // }
+
        }
 
-    console.log("we have data + " + data);
+   
 
 
    })
 
 
-//This Gets and then brings the odds to browser. It coincides with server.js line 44 and line 139.
+//This Gets and then brings the odds to browser. It coincides with server.js line 47 and line 144.
 
     $("#bottomLink").click(function () {
         $.ajax({
@@ -66,9 +72,9 @@ $(document).ready(function () {
     })
 
 
-//This saves to the db and coincides with server.js line 161. 
+//This saves to the db and coincides with server.js line 166. 
 
-//This is linked to save buttons. I can get a team to show up but want to reload with the new data. Where do I put the code see comment on line 67 that has it reload it? 
+//This is linked to save buttons. I can get a team to show up but want to reload with the new data. Where do I put the code see to reload it? 
 
     $(document).on("click",".save",function(){
 
@@ -96,13 +102,17 @@ $(document).ready(function () {
                     "'>Make a Note</button></p> <br/><br/><br/>" +
                     data[i].notes
                 );
+    for (var j = 0; j < data[i].notes.length; j++) {
+      $("#savedones").append("<br/> title: " + data[i].notes[j] + ".");
+    }
+
             }
 
             console.log("we have data + " + data);
         })
     })
 
-//This is linked to the delete buttons. This code also deletes from the database however I don't know where to put the refreshed Saved inventory. It doesn't refresh on click which I would like it to. 
+//This is linked to the delete buttons. This code also deletes from the database however I don't know where to put the refreshed Saved inventory. It doesn't refresh on click which I would like it to. Linked to server.js 212. 
 
     $(document).on("click", ".delete", function () {
 
@@ -127,63 +137,96 @@ $(document).ready(function () {
                 "'>Make a Note</button></p> <br/><br/><br/>" +
                 data[i].notes
             );
+              
           }
 
-          console.log("we have data + " + data);
+          
         });
     })
 
+
+
+
+$(document).on("click","#enter", function(){
+
+    var thisId = $(this).attr("data-id");
+
+    console.log("Can you see this" +thisId);
+
+    $.ajax({
+
+        method: "POST",
+        url: "/saved/" + thisId,
+        data: {
+            title: $("#title").val(),
+            body:$("#text").val()
+        }
+       
+    })
+
+    .then(function(data){
+
+    })
+ console.log("Can you see this" + thisId);
+
+  $("#buttonhere").html("");
+});
+
+
+
+
+$(document).on("click", "#enter", function () {
+  var thisId = $(this).attr("data-id");
+
+  console.log("Can you see this" + thisId);
+
+  $.ajax({
+
+        method: "GET",
+        url: "/notes/" + thisId,
+        
+    })
+
+    .then(function(data){
+
+      console.log("these are the teams comments" + data)
+
+
+    })
+    $("#buttonhere").html("");
+
+});
+
+
+
+
+
+
+
+
+
+//This function brings up the modal. 
 
  $(document).on("click", ".makenote", function () {
 
       var thisTeam = $(this).attr("data-id");
       console.log("this is here " + thisTeam);
 
-      $.ajax({
-        method: "GET",
-        url: "/notes" 
-      }).then(function (data) {
-        for (var i = 0; i < data.length; i++) {
-      
-
-          $("#notes").append(
-            "<p data-id='" +
-              data[i]._id +
-              "'>" +
-              data[i].team +
-              "  " +
-              data[i].odds +
-              "	&nbsp;<button class ='delete' data-id='" +
-              data[i]._id +
-              "'>Delete</button> &nbsp; <button class ='makenote' data-team='" +
-              data[i].team +
-              "'>Make a Note</button></p> <br/><br/><br/>" +
-              data[i].notes
-          );
-        }
-
-        console.log("we have data + " + data);
-      });
-
-
-
  function showModal() {
+
+
+  $("#buttonhere").append(
+    "<br/><br/<p><input type='submit' id='enter' data-id='" +
+      thisTeam +
+      "'></p> <br/><br/><br/>"
+  );
+
    $("#matchModal").modal("show");
  }
  showModal();
 
-
-
     });
 
-
-
-
- 
-
-  
-
  });
-
 
 
