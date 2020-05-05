@@ -242,10 +242,11 @@ db.note.create(req.body)
     console.log("Here is a NOTE" +dbNote)
     var title = dbNote.title;
     var body = dbNote.body; 
+    var odds = dbNote.odds;
 
 return db.saved.findOneAndUpdate(
   {_id:req.body.id},
-  { $push: { notes: title, notes:body } },
+  { $push: { note:dbNote} },
   { new: true }
 );
     })
@@ -263,21 +264,21 @@ return db.saved.findOneAndUpdate(
 
 app.get("/notes", function(req,res){
 
+
 console.log("excel" + res);
 db.note.find({})
 .then(function(dbnote){
 
-    res.json(dbnote)
-
-    .catch(function(err){
-
-        res.json(err);
-    });
-
-
-});
+    res.json(dbnote);
+    console.log("HERE ARE THE NOTES"+ dbnote); 
 
 })
+.catch(function (err) {
+
+            res.json(err);
+});
+
+});
 
 
 // app.get("/makeanote/:team",function(req,res){
@@ -406,4 +407,18 @@ app.get("/saved/:id", function (req, res) {
 
 app.listen(Port, function () {
   console.log("App running on port " + Port);
+});
+
+
+app.get("/deletenotes/:id", function (req, res) {
+  console.log("DELETETHIS" + req.params.id);
+  db.note.findOne({_id: req.params.id }).then(function (notess) {
+    console.log("DELETETHIS" + notess);
+
+    if (!notess) {
+      res.send(false);
+    } else {
+      db.saved.deleteOne(notess).then(function (data) {});
+    }
+  });
 });

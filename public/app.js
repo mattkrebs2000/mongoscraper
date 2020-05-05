@@ -21,9 +21,10 @@ $(document).ready(function () {
                "	&nbsp;<button class ='delete' data-id='" +
                data[i]._id +
                "'>Delete</button> &nbsp; <button class ='makenote' data-id='" +
-               data[i]._id +
-               "'>Make a Note</button></p><br/>" +
-               data[i].notes
+               data[i].team +
+               "' data-odds='" +
+               data[i].odds +
+               "'>Make a Note</button></p><br/>"
            );
           
             // for (var j=0; j<data[i].notes.length; j++){
@@ -98,13 +99,12 @@ $(document).ready(function () {
                     "	&nbsp;<button class ='delete' data-id='" +
                     data[i]._id +
                     "'>Delete</button> &nbsp; <button class ='makenote' data-id='" +
-                    data[i]._id +
-                    "'>Make a Note</button></p> <br/><br/><br/>" +
-                    data[i].notes
+                    data[i].team +
+                    "' data-odds='" +
+                    data[i].odds +
+                    "'>Make a Note</button></p> <br/><br/><br/>" 
                 );
-    for (var j = 0; j < data[i].notes.length; j++) {
-      $("#savedones").append("<br/> title: " + data[i].notes[j] + ".");
-    }
+   
 
             }
 
@@ -132,8 +132,10 @@ $(document).ready(function () {
                 data[i].odds +
                 "	&nbsp;<button class ='delete' data-id='" +
                 data[i]._id +
-                "'>Delete</button> &nbsp; <button class ='makenote' data-team='" +
+                "'>Delete</button> &nbsp; <button class ='makenote' data-id='" +
                 data[i].team +
+                "' data-odds='" +
+                data[i].odds +
                 "'>Make a Note</button></p> <br/><br/><br/>" +
                 data[i].notes
             );
@@ -150,6 +152,7 @@ $(document).ready(function () {
 $(document).on("click","#enter", function(){
 
     var thisId = $(this).attr("data-id");
+    var thisOdd = $(this).attr("data-odds")
 
     console.log("Can you see this" +thisId);
 
@@ -160,12 +163,17 @@ $(document).on("click","#enter", function(){
         data: {
             title: $("#title").val(),
             body:$("#text").val(),
-            id: thisId
+            id: thisId,
+            odds:thisOdd
         }
        
     })
 
     .then(function(data){
+
+      
+
+
 
     })
  console.log("Can you see this" + thisId);
@@ -211,14 +219,27 @@ $(document).on("click","#enter", function(){
  $(document).on("click", ".makenote", function () {
 
       var thisTeam = $(this).attr("data-id");
+      var thisOdd = $(this).attr("data-odds")
       console.log("this is here " + thisTeam);
+
+      //put notes into Modal 
+
+        // var thisId = $(this).attr("data-id");
+
+        // $.ajax({
+        //     method: "GET",
+        //     url: "/notes/" + thisId
+        // }).then(function (data) {
+        //     for (var i = 0; i < data.length; i++) {
+
+
 
  function showModal() {
 
 
   $("#buttonhere").append(
     "<br/><br/<p><input type='submit' id='enter' data-id='" +
-      thisTeam +
+      thisTeam + "' data-odds='"+thisOdd+
       "'></p> <br/><br/><br/>"
   );
 
@@ -231,3 +252,34 @@ $(document).on("click","#enter", function(){
  });
 
 
+
+$(document).ready(function () {
+
+
+   $.ajax({
+    method: "GET",
+    url: "/notes"
+   }).then(function(data) {
+
+    console.log("NOTES NOTES" + data);
+
+       for (var i = 0; i < data.length; i++) {
+           $("#notes").append(
+             "<p data-id='" +
+               data[i]._id +
+               "'>" + 
+               data[i].id + "	&nbsp; "+ data[i].odds +
+               "<br/>  " +
+               data[i].title +
+               "	&nbsp;" +
+               "</p><br/><br/>"
+           );
+          
+       }
+
+
+   })
+  });
+
+
+ 

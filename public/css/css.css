@@ -17,6 +17,7 @@ div .alert {
 background:white; 
 color: black;
 border: 10px solid blue;
+margin-bottom: 15px;
 
 }
 
@@ -24,6 +25,7 @@ div.card{
 background:white; 
 color: black;
 border: 10px solid blue;
+margin-bottom: 15px;
 
 }
 
