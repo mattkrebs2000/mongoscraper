@@ -1,2 +1,9 @@
-# mongoscraper
-This App scrapes "betting lines" for next year's super bowl and allows people to make comments about the lines. 
+## mongoscraper
+
+
+![alt text][logo]
+
+[logo]: https://github.com/mattkrebs1974/mongoscraper/blob/master/MongoScraper%20copy.png
+
+
+This app uses Cheerio and Axios to scrape Super Bowl odds and stores the info in MongoDB.
