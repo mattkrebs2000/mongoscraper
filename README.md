@@ -10,10 +10,10 @@ This app uses Cheerio and Axios to scrape Super Bowl odds and stores the info in
 
 ## Deployment 
 
-This application can be found [here.]()
+This application can be found [here.](https://oddsscraper.herokuapp.com/)
 
 ## User Experience
 
-As each user logs in they will be designated as either "User 1" or "User 2." Once both have logged in the "User 1" will be prompted to select his/her tool. Then "User 2" will be prompted to choose his/her tool. After this happens the result of the game will be shown and the wins/losses recorded.  
+Upon page load a user can opt to Scrape current super bowl odds. He/she can then opt to save an Odd. They can then load a comment about about one of the odds. 
 
 
